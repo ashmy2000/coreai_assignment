@@ -23,9 +23,6 @@ The **Smart Notes Organizer** uses the following technologies and tools:
 - **Pydantic**: Used for data validation and serialization (e.g., validating note content).
 - **pytest**: A testing framework used for unit tests and test-driven development.
 
-### AI/ML Tools (if applicable):
-- **Natural Language Processing (NLP)**: To implement AI features such as categorizing or analyzing note content (e.g., using `spaCy`, `transformers`).
-
 ---
 
 ## Running the App Locally
