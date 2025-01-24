@@ -1,8 +1,8 @@
-# Smart Notes Organizer - README
+# Smart Notes Organiser - README
 
 ## Overview
 
-The **Smart Notes Organizer** is a simple web application built using FastAPI that allows users to create, view, update, and delete notes. This app also features AI tools that can be integrated to analyze note content or categorize them based on predefined rules or machine learning models.
+The **Smart Notes Organiser** is a simple web application built using FastAPI that allows users to create, view, update, and delete notes. This app also features AI tools that can be integrated to analyze note content or categorize them based on predefined rules or machine learning models.
 
 ### Features:
 - **Create**: Users can create new notes with a title, content, and category.
@@ -40,12 +40,23 @@ Before running the application, ensure that you have Python 3.7+ installed on yo
    git clone <repository_url>
    cd <project_directory>
 
-2 **Create a virtual environment**:
+2. **Create a virtual environment(MAC)**:
    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
+   python3 -m venv venv
+   source venv/bin/activate
 
-3 **Create a virtual environment **:
+3. **Create a virtual environment(Windows)**:
    ```bash
-    python3 -m venv venv>
-    source venv/bin/activate>
+    python -m venv venv
+    .\venv\Scripts\activate
+    
+4. **Install the required dependencies:**:
+   ```bash
+    pip install -r requirements.txt
+
+5. **Run the FastAPI server::**:
+   ```bash
+    uvicorn backend.app.main:app --reload
+
+   The server will be running on http://localhost:8000.
+   You can check the API documentation at http://localhost:8000/docs.
