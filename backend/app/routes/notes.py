@@ -5,6 +5,7 @@ from ..database import get_db
 
 router = APIRouter()
 
+
 # Create a new note
 @router.post("/", response_model=schemas.NoteResponse)
 def create_note(note: schemas.NoteCreate, db: Session = Depends(get_db)):
@@ -23,6 +24,19 @@ def get_notes(title: str = None, db: Session = Depends(get_db)):
     if title:
         query = query.filter(models.Note.title.contains(title))
     return query.all()
+
+@router.get("/grouped", response_model=dict)
+def get_notes_grouped_by_category(db: Session = Depends(get_db)):
+    """
+    Get all notes grouped by category.
+    """
+    notes = db.query(models.Note).all()
+    grouped_notes = {}
+    for note in notes:
+        if note.category not in grouped_notes:
+            grouped_notes[note.category] = []
+        grouped_notes[note.category].append(note)
+    return grouped_notes
 
 # Delete a note by title
 @router.delete("/")

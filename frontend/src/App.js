@@ -12,21 +12,35 @@ function App() {
 
     const fetchNotes = async (title = "") => {
         const response = await getNotes(title);
-        setNotes(response.data);
-        setShowNotes(true);
+        const grouped = response.data.reduce((acc, note) => {
+            acc[note.category] = acc[note.category] || [];
+            acc[note.category].push(note);
+            return acc;
+        }, {});
+
+        setNotes(grouped); // Store grouped notes
+        setShowNotes(true); // Display the notes section
         setViewedNote(null);
         setEditingNote(null);
     };
+
 
     const handleAddNote = async () => {
         if (!newNote.title || !newNote.content || !newNote.category) {
             alert("Please fill in all fields");
             return;
         }
-        await addNote(newNote);
-        fetchNotes();
-        setNewNote({ title: "", content: "", category: "" });
+
+        try {
+            await addNote(newNote); // Add the note to the backend
+            setNewNote({ title: "", content: "", category: "" }); // Clear the input fields
+            window.location.reload(); // Trigger a full page refresh
+        } catch (error) {
+            console.error("Error adding note:", error);
+            alert("An error occurred while adding the note. Please try again.");
+        }
     };
+
 
     const handleDeleteNote = async (title) => {
         await deleteNote(title);
@@ -75,13 +89,23 @@ function App() {
             alert("Please enter a title to search.");
             return;
         }
-        const response = await getNotes(search);
+        const response = await getNotes(search); // Fetch notes matching the search query
         if (response.data.length === 0) {
             alert("No notes were found with this name.");
             return;
         }
-        setNotes(response.data); // Show the results if notes are found
-        setShowNotes(true); // Show the notes section
+
+        // Group the search results by category
+        const grouped = response.data.reduce((acc, note) => {
+            acc[note.category] = acc[note.category] || [];
+            acc[note.category].push(note);
+            return acc;
+        }, {});
+
+        setNotes(grouped); // Update the grouped notes state
+        setShowNotes(true); // Display the notes section
+        setViewedNote(null);
+        setEditingNote(null);
     };
 
 
@@ -130,20 +154,30 @@ function App() {
 
             {showNotes && !viewedNote && !editingNote && (
                 <div className="notes-list">
-                    {notes.map((note) => (
-                        <div className="note" key={note.title}>
-                            <h3>{note.title}</h3>
-                            <p>{note.content}</p>
-                            <small>Category: {note.category}</small>
-                            <button onClick={() => handleViewNote(note.title)}>View</button>
-                            <button onClick={() => handleEditNote(note)}>Edit</button>
-                            <button className="delete" onClick={() => handleDeleteNote(note.title)}>
-                                Delete
-                            </button>
+                    {Object.keys(notes).map((category) => (
+                        <div className="category-group" key={category}>
+                            <h2>{category}</h2>
+                            {notes[category].map((note) => (
+                                <div className="note" key={note.title}>
+                                    <h3>{note.title}</h3>
+                                    <p>{note.content}</p>
+                                    <small>Category: {note.category}</small>
+                                    <button onClick={() => handleViewNote(note.title)}>View</button>
+                                    <button onClick={() => handleEditNote(note)}>Edit</button>
+                                    <button
+                                        className="delete"
+                                        onClick={() => handleDeleteNote(note.title)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            ))}
                         </div>
                     ))}
                 </div>
             )}
+
+
 
             {editingNote && (
                 <div className="edit-note-form">
