@@ -1,0 +1,22 @@
+# General
+*.log
+*.pyc
+__pycache__/
+.env
+
+# Backend
+backend/venv/
+backend/notes.db
+
+# Frontend
+frontend/node_modules/
+frontend/.env
+frontend/build/
+
+# IDE/Editor
+.vscode/
+.idea/
+.DS_Store
+
+# OS Specific
+Thumbs.db
