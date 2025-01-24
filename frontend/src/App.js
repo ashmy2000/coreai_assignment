@@ -106,7 +106,7 @@ function App() {
 
     return (
         <div className="app-container">
-            <h1>Smart Notes Organizer</h1>
+            <h1>Smart Notes Organiser</h1>
 
             {!viewedNote && !editingNote && (
                 <>
