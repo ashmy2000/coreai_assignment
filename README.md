@@ -54,9 +54,36 @@ Before running the application, ensure that you have Python 3.7+ installed on yo
    ```bash
     pip install -r requirements.txt
 
-5. **Run the FastAPI server::**:
+5. **Run the frontend:**:
+   ```bash
+   cd frontend
+    npm install
+    npm start
+
+   
+6. **Run the FastAPI server:**:
    ```bash
     uvicorn backend.app.main:app --reload
 
    The server will be running on http://localhost:8000.
    You can check the API documentation at http://localhost:8000/docs.
+
+## Testing Approach & Running Tests
+
+### Test Structure
+**Create**: Ensure notes are added successfully.
+**Read**: Test that notes can be retrieved by title or category.
+**Update**: Verify that notes can be updated with new information.
+**Delete***: Ensure that notes are properly deleted from the system.
+### Testing Framework:
+The app uses **pytest** for unit testing, and tests are located in the tests folder.
+
+7. **Activate your virtual environment:**:
+   ```bash
+    source venv/bin/activate  # Linux/macOS
+    .\venv\Scripts\activate  # Windows
+
+8. **Activate your virtual environment:**:
+   ```bash
+    python3 -m pytest backend/tests/
+
