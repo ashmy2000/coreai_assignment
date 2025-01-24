@@ -33,9 +33,19 @@ The **Smart Notes Organizer** uses the following technologies and tools:
 ### Prerequisites
 Before running the application, ensure that you have Python 3.7+ installed on your system.
 
-### Installation Steps
+## Installation Steps
 
 1. **Clone the repository**:
    ```bash
    git clone <repository_url>
    cd <project_directory>
+
+2 **Create a virtual environment**:
+   ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+
+3 **Create a virtual environment **:
+   ```bash
+    python3 -m venv venv>
+    source venv/bin/activate>
