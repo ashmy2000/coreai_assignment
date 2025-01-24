@@ -17,7 +17,5 @@ This assignment aims to assess the candidate's ability to deliver a feature-comp
 - **Hosting/Deployment**: Azure (Free Trial)  
 
 ---
-=======
-checking 
->>>>>>> 2240935 (Adding Draft Files)
+
 
