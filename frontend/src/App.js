@@ -6,10 +6,11 @@ function App() {
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState({ title: "", content: "", category: "" });
     const [search, setSearch] = useState("");
-    const [viewedNote, setViewedNote] = useState(null);
-    const [editingNote, setEditingNote] = useState(null);
+    const [viewedNote, setViewedNote] = useState(null); // Stores the selected note to be viewed
+    const [editingNote, setEditingNote] = useState(null); // For handling note editing
     const [showNotes, setShowNotes] = useState(false);
 
+    // Fetching notes from backend and grouping by category
     const fetchNotes = async (title = "") => {
         const response = await getNotes(title);
         const grouped = response.data.reduce((acc, note) => {
@@ -20,10 +21,9 @@ function App() {
 
         setNotes(grouped); // Store grouped notes
         setShowNotes(true); // Display the notes section
-        setViewedNote(null);
-        setEditingNote(null);
+        setViewedNote(null); // Reset viewed note when notes are shown
+        setEditingNote(null); // Reset editing state
     };
-
 
     const handleAddNote = async () => {
         if (!newNote.title || !newNote.content || !newNote.category) {
@@ -33,14 +33,13 @@ function App() {
 
         try {
             await addNote(newNote); // Add the note to the backend
-            setNewNote({ title: "", content: "", category: "" }); // Clear the input fields
+            setNewNote({ title: "", content: "", category: "" }); // Clear input fields
             window.location.reload(); // Trigger a full page refresh
         } catch (error) {
             console.error("Error adding note:", error);
             alert("An error occurred while adding the note. Please try again.");
         }
     };
-
 
     const handleDeleteNote = async (title) => {
         await deleteNote(title);
@@ -66,20 +65,17 @@ function App() {
         fetchNotes();
     };
 
-    const handleViewNote = async (title) => {
-        const response = await getNotes(title);
-        if (response.data.length > 0) {
-            setNotes(response.data);
-            setShowNotes(true);
-        } else {
-            alert("Note not found!");
-        }
+    // When the "View" button is clicked, show the note's details
+    const handleViewNote = (note) => {
+        setViewedNote(note); // Set the note to be viewed
+        setShowNotes(false); // Hide notes list
+        setEditingNote(null); // Ensure editing is reset
     };
 
     const handleBackToMain = () => {
-        setViewedNote(null);
+        setViewedNote(null); // Reset viewed note to go back to the main page
         setEditingNote(null);
-        setShowNotes(false);
+        setShowNotes(true);
         setSearch("");
         setNotes([]);
     };
@@ -107,7 +103,6 @@ function App() {
         setViewedNote(null);
         setEditingNote(null);
     };
-
 
     return (
         <div className="app-container">
@@ -162,7 +157,7 @@ function App() {
                                     <h3>{note.title}</h3>
                                     <p>{note.content}</p>
                                     <small>Category: {note.category}</small>
-                                    <button onClick={() => handleViewNote(note.title)}>View</button>
+                                    <button onClick={() => handleViewNote(note)}>View</button>
                                     <button onClick={() => handleEditNote(note)}>Edit</button>
                                     <button
                                         className="delete"
@@ -176,8 +171,6 @@ function App() {
                     ))}
                 </div>
             )}
-
-
 
             {editingNote && (
                 <div className="edit-note-form">
@@ -205,7 +198,7 @@ function App() {
                             setEditingNote({ ...editingNote, category: e.target.value })
                         }
                     />
-                    <button onClick={handleSaveEdit}>Okay</button>
+                    <button onClick={handleSaveEdit}>Save</button>
                     <button onClick={handleBackToMain}>Cancel</button>
                 </div>
             )}
@@ -223,4 +216,3 @@ function App() {
 }
 
 export default App;
-
