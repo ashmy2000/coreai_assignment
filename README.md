@@ -18,4 +18,5 @@ This assignment aims to assess the candidate's ability to deliver a feature-comp
 
 ---
 
-
+To Run This Note Application:
+1. Install 
