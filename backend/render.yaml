@@ -3,5 +3,5 @@ services:
     name: coreai_assignment
     env: python
     buildCommand: "pip install -r backend/requirements.txt"
-    startCommand: ./backend/start.sh
+    startCommand: cd backend && ./start.sh
     plan: free
