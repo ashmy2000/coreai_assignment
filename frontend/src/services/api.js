@@ -1,23 +1,29 @@
 import axios from "axios";
 
-const API_URL =
-  process.env.NODE_ENV === "production"
-    ? "" // For deployment, use relative paths
-    : "http://127.0.0.1:8000/api/v1/notes"; // For local development, use the full backend URL
-
+// Use the backend's deployed live URL
+const API_URL = "https://coreai-assignment-1.onrender.com/api/v1/notes";
 
 // Fetch all notes or search by title
-export const getNotes = (title = "") => axios.get(API_URL, { params: { title } });
+export const getNotes = (title = "") => {
+    return axios.get(API_URL, { params: { title } });
+};
 
 // Add a new note
-export const addNote = (note) => axios.post(API_URL, note);
+export const addNote = (note) => {
+    return axios.post(API_URL, note);
+};
 
 // Delete a note by title
-export const deleteNote = (title) => axios.delete(API_URL, { params: { title } });
+export const deleteNote = (title) => {
+    return axios.delete(API_URL, { params: { title } });
+};
 
 // Update a note by title
-export const updateNote = (title, updatedNote) =>
-    axios.put(`${API_URL}/${title}`, updatedNote);
+export const updateNote = (title, updatedNote) => {
+    return axios.put(`${API_URL}/${title}`, updatedNote);
+};
 
-// Get notes grouped by category
-export const getGroupedNotes = () => axios.get(`${API_URL}/grouped`);
+// View a single note by title (optional, if required separately)
+export const viewNote = (title) => {
+    return axios.get(`${API_URL}`, { params: { title } });
+};
