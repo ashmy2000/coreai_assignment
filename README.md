@@ -16,12 +16,21 @@ The **Smart Notes Organiser** is a simple web application built using FastAPI th
 
 The **Smart Notes Organizer** uses the following technologies and tools:
 
+### Frontend:
+- **React**: JavaScript library for building the user interface
+- **Axios**: HTTP client for making API requests.
+- 
 ### Backend:
-- **FastAPI**: A high-performance web framework for building APIs with Python 3.7+.
-- **SQLAlchemy**: ORM (Object-Relational Mapping) used to interact with databases.
-- **SQLite**: A lightweight database used for development and testing (can be easily replaced with other DBs like PostgreSQL, MySQL).
-- **Pydantic**: Used for data validation and serialization (e.g., validating note content).
-- **pytest**: A testing framework used for unit tests and test-driven development.
+- **FastAPI**: Framework for building the API.
+- **SQLAlchemy**: ORM for database interaction.
+- **SQLite**: Lightweight database for storing notes.
+- **Uvicorn**: ASGI server for running the FastAPI application.
+- **Pytest**: Testing framework for ensuring code reliability.
+
+### Tools and Deployment::
+- **PyCharm**: IDE used for development.
+- **Git and GitHub**: For version control and code collaboration.
+- **Render**: Cloud platform for deploying both the frontend and backend.
 
 ---
 
