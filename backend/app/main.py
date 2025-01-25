@@ -3,21 +3,14 @@ from .database import Base, engine
 from .routes.notes import router as notes_router
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from fastapi.staticfiles import StaticFiles
-from app.routes import notes
 
 app = FastAPI()
 
-# Include the notes API routes
-app.include_router(notes.router, prefix="/api/v1/notes", tags=["notes"])
-
-
-# Serve the frontend build folder
-app.mount("/", StaticFiles(directory="../frontend/build", html=True), name="static")
-
+# CORS Middleware Configuration
+# Replace with your frontend's deployed URL (e.g., "https://your-frontend-url.onrender.com")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Use a specific origin instead of "*" for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,6 +39,7 @@ Base.metadata.create_all(bind=engine)
 # Include API routes
 app.include_router(notes_router, prefix="/api/v1/notes", tags=["Notes"])
 
+# Home Route
 @app.get("/")
 def home():
     return {"message": "Welcome to Smart Notes Organizer!"}
