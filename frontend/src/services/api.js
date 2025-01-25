@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000/api/v1/notes";
+const API_URL = "https://coreai-assignment-4.onrender.com";
 
 // Fetch all notes or search by title
 export const getNotes = (title = "") => axios.get(API_URL, { params: { title } });
