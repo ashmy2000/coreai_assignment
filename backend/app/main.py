@@ -3,9 +3,16 @@ from .database import Base, engine
 from .routes.notes import router as notes_router
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from ..app.routes import notes
 
 app = FastAPI()
 
+# Include the notes API router
+app.include_router(notes.router, prefix="/api/notes")
+
+# Mount the React build folder to serve the frontend
+app.mount("/", StaticFiles(directory="frontend/build", html=True), name="static")
 
 app.add_middleware(
     CORSMiddleware,

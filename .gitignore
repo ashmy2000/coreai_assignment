@@ -11,7 +11,10 @@ backend/notes.db
 # Frontend
 frontend/node_modules/
 frontend/.env
-frontend/build/
+
+# Keep frontend/build for deployment purposes
+# Uncomment below if you want to ignore it:
+# frontend/build/
 
 # IDE/Editor
 .vscode/
@@ -20,3 +23,4 @@ frontend/build/
 
 # OS Specific
 Thumbs.db
+

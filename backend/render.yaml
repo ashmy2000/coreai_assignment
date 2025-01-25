@@ -1,6 +1,7 @@
 services:
   - type: web
-    name: backend
+    name: coreai_assignment
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: ./start.sh
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "cd backend && ./start.sh"
+    plan: free

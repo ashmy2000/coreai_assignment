@@ -4,3 +4,4 @@ sqlalchemy
 pydantic
 transformers
 pytest
+fastapi[staticfiles]
