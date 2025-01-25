@@ -4,4 +4,4 @@ sqlalchemy
 pydantic
 transformers
 pytest
-
+sqlite3
