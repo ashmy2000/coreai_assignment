@@ -23,7 +23,7 @@ export const updateNote = (title, updatedNote) => {
     return axios.put(`${API_URL}/${title}`, updatedNote);
 };
 
-// View a single note by title (optional, if required separately)
-export const viewNote = (title) => {
-    return axios.get(`${API_URL}`, { params: { title } });
+// Group notes by category
+export const getGroupedNotes = () => {
+    return axios.get(`${API_URL}/grouped`);
 };
